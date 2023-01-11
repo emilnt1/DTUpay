@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 public class AccountEndpoint {
 
     @POST
-    @Path("/account")
     public String createAccount() {
 
 
