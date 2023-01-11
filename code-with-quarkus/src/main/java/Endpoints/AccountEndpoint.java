@@ -7,19 +7,24 @@ import dtu.ws.fastmoney.BankServiceService;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 
-@Path("/pay")
+@Path("/accounts")
 public class AccountEndpoint {
 
     @POST
     @Path("/account")
     public String createAccount() {
-        BankService bank = new BankServiceService().getBankServicePort();
+
 
         return null;
     }
 
-
-
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String helloService() {
+        return "Hello from REST";
+    }
 }

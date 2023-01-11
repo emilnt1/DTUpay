@@ -14,6 +14,6 @@ public class HelloService {
 	}
 	
 	public String hello() {
-		return baseUrl.path("hello").request().get(String.class);
+		return baseUrl.path("accounts").request().get(String.class);
 	}
 }
