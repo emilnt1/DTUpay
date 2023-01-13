@@ -2,6 +2,7 @@ package helloservice;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import io.cucumber.java.en.And;
 import org.acme.Person;
 
 import io.cucumber.java.en.Then;
@@ -44,4 +45,7 @@ public class PersonServiceSteps {
 	    service.setPersonXml(new Person(name,address));
 	}
 
+    @And("DTUpay returns an error message")
+    public void dtupayReturnsAnErrorMessage() {
+    }
 }
