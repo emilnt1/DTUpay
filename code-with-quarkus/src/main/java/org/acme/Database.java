@@ -3,6 +3,7 @@ package org.acme;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class Database {
     HashMap<String, List<Payment>> paymentList = new HashMap<String, List<Payment>>();
