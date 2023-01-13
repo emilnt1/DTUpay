@@ -31,7 +31,7 @@ import jakarta.xml.bind.annotation.XmlType;
     "errorMessage",
     "message"
 })
-public class BankServiceException {
+public class BankServiceException extends Throwable {
 
     protected String errorMessage;
     protected String message;
