@@ -6,7 +6,10 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.acme.Customer;
+import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.BasicResponseHandler;
 
 public class CustomerAPI {
 
@@ -30,6 +33,8 @@ public class CustomerAPI {
     }
 
     private void setCustomer(Customer customer, String mediaType){
-        baseUrl.path("customers").request().post(Entity.entity(customer, mediaType));
+        Response response = baseUrl.path("customers").request().post(Entity.entity(customer, mediaType));
+        String output = response.readEntity(String.class);
+        System.out.println("This is the result of output: " + output);
     }
 }

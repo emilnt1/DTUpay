@@ -29,9 +29,9 @@ public class RegisterSteps {
     @Before
     public void createCustomerBankAccount(){
         cuser = new User();
-        cuser.setCprNumber("0602971234");
-        cuser.setFirstName("Oliver");
-        cuser.setLastName("Fiedler");
+        cuser.setCprNumber("1104981234");
+        cuser.setFirstName("Hans Christian");
+        cuser.setLastName("Basse");
 
         try{
             cid = bank.createAccountWithBalance(cuser, new BigDecimal(1000));
@@ -47,9 +47,9 @@ public class RegisterSteps {
     @Before
     public void createMerchantBankAccount(){
         muser = new User();
-        muser.setCprNumber("0808981234");
-        muser.setFirstName("Kasper");
-        muser.setLastName("Skov");
+        muser.setCprNumber("2312981234");
+        muser.setFirstName("Emil");
+        muser.setLastName("Bassemand");
 
         try{
             mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));

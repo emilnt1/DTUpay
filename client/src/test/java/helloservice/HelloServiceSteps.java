@@ -26,4 +26,13 @@ public class HelloServiceSteps {
 		assertEquals(string, result);
 	}
 
+	@When("I call the hello service from merchant")
+	public void iCallTheHelloServiceFromMerchant() {
+		result = service.helloMerchant();
+	}
+
+	@When("I call the hello service from customer")
+	public void iCallTheHelloServiceFromCustomer() {
+		result = service.helloCustomer();
+	}
 }

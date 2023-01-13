@@ -14,8 +14,8 @@ public class UserController {
 
     Database database = Database.getInstance();
 
-    public void createCustomer(Customer customer) {
-        database.addUser(customer);
+    public String createCustomer(Customer customer) {
+        return database.addUser(customer);
     }
 
     public Customer getCustomer() {
@@ -23,8 +23,8 @@ public class UserController {
         return null;
     }
 
-    public void createMerchant(Merchant merchant){
-        database.addUser(merchant);
+    public String createMerchant(Merchant merchant){
+        return database.addUser(merchant);
     }
 
     public Merchant getMerchant() {

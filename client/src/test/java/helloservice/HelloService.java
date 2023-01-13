@@ -16,4 +16,11 @@ public class HelloService {
 	public String hello() {
 		return baseUrl.path("hello").request().get(String.class);
 	}
+
+	public String helloCustomer() {
+		return baseUrl.path("customers").request().get(String.class);
+	}
+	public String helloMerchant() {
+		return baseUrl.path("merchants").request().get(String.class);
+	}
 }

@@ -31,16 +31,16 @@ public class Database {
         return databaseInstance;
     }
 
-    public void addUser(Customer customer) {
+    public String addUser(Customer customer) {
         customer.setId(createId());
         users.add(customer);
-        System.out.println("Recieved customer with id: " + customer.id);
+        return customer.id;
     }
 
-    public void addUser(Merchant merchant) {
+    public String addUser(Merchant merchant) {
         merchant.setId(createId());
         users.add(merchant);
-        System.out.println("Recieved merchant with id: " + merchant.id);
+        return merchant.id;
     }
 
     private String createId() {
