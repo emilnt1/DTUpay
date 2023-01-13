@@ -11,9 +11,9 @@ Feature: Register
     #When a customer with an invalid bank id is registered
     #Then the customer is not registered at DTUPay
 
-  #Scenario: Register Merchant at DTUPay
-    #When a merchant with a valid bank id is registered
-    #Then the merchant is registered at DTUPay
+  Scenario: Register Merchant at DTUPay
+    Given a merchant with a valid bank id
+    Then the merchant is registered at DTUPay
 
   #Scenario: Register Merchant at DTUPay with invalid bank id
     #When a merchant with an invalid bank id is registered
