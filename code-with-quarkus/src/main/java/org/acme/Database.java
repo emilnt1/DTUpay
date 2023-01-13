@@ -34,11 +34,13 @@ public class Database {
     public void addUser(Customer customer) {
         customer.setId(createId());
         users.add(customer);
+        System.out.println("Recieved customer with id: " + customer.id);
     }
 
     public void addUser(Merchant merchant) {
         merchant.setId(createId());
         users.add(merchant);
+        System.out.println("Recieved merchant with id: " + merchant.id);
     }
 
     private String createId() {

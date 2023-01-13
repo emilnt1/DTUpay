@@ -23,6 +23,10 @@ public class UserController {
         return null;
     }
 
+    public void createMerchant(Merchant merchant){
+        database.addUser(merchant);
+    }
+
     public Merchant getMerchant() {
         return null;
     }
