@@ -14,8 +14,8 @@ public class Customer extends User {
     Queue<Token> tokens = new LinkedList<>();
 
 
-    public Customer(String id, String firstName, String lastName, String cpr, String account) {
-        super(id, firstName, lastName, cpr, account);
+    public Customer(String id, String firstName, String lastName, String cpr, String accountId) {
+        super(id, firstName, lastName, cpr, accountId);
     }
 
     public Token sendToken() throws Exception {

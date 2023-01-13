@@ -2,10 +2,21 @@ package controller;
 
 import dtu.ws.fastmoney.User;
 import org.acme.Customer;
+import org.acme.Database;
 import org.acme.Merchant;
+import org.acme.Payment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class UserController {
 
+    Database database = Database.getInstance();
+
+    public void createCustomer(Customer customer) {
+        database.addUser(customer);
+    }
 
     public Customer getCustomer() {
 

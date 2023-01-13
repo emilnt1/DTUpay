@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Merchant extends User {
 
-    public Merchant(String id, String firstName, String lastName, String cpr, String account) {
-        super(id, firstName, lastName, cpr, account);
+    public Merchant(String id, String firstName, String lastName, String cpr, String accountId) {
+        super(id, firstName, lastName, cpr, accountId);
     }
 }

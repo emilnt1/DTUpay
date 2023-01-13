@@ -1,13 +1,12 @@
 package org.acme;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import lombok.*;
 
+@XmlRootElement // Needed for XML serialization and deserialization
 @Getter
-@Setter
-@NoArgsConstructor
+@Setter// Automatic getter and setters and equals etc
+
 public class Merchant extends User {
 
     public Merchant(String id, String firstName, String lastName, String cpr, String account) {

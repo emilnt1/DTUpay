@@ -1,5 +1,6 @@
 package Endpoints;
 
+import controller.BankController;
 import dtu.ws.fastmoney.Account;
 import dtu.ws.fastmoney.BankService;
 import dtu.ws.fastmoney.BankServiceService;
@@ -13,17 +14,12 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/accounts")
 public class AccountEndpoint {
-
-    @POST
-    public String createAccount() {
-
-
-        return null;
-    }
-
+    BankController bankController = new BankController();
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String helloService() {
-        return "Hello from REST";
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean verifyAccount(String id) {
+        return bankController.verifyAccount(id);
     }
+
+
 }

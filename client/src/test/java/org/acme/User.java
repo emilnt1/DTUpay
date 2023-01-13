@@ -1,12 +1,13 @@
 package org.acme;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 abstract class User {
