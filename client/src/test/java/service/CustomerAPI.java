@@ -11,6 +11,8 @@ import org.acme.Customer;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.BasicResponseHandler;
 
+import java.util.LinkedList;
+
 public class CustomerAPI {
 
     WebTarget baseUrl;
@@ -26,16 +28,28 @@ public class CustomerAPI {
     }
     */
 
-    public void createAccount(User user, String id){
-        Customer customer = new Customer("-1", user.getFirstName(), user.getLastName(), user.getCprNumber(), id);
+    public String createAccount(User user, String accountId){
+        Customer customer = new Customer();
+        customer.setFirstName(user.getFirstName());
+        customer.setLastName(user.getLastName());
+        customer.setAccount(accountId);
+        customer.setCpr(user.getCprNumber());
+        customer.setTokens(new LinkedList<>());
+        customer.setId("-1");
 
-        setCustomer(customer, MediaType.APPLICATION_JSON);
+        return setCustomer(customer, MediaType.APPLICATION_JSON);
     }
 
-    private void setCustomer(Customer customer, String mediaType){
-        System.out.println("Customer we are sending: " + customer.getFirstName());
+    private String setCustomer(Customer customer, String mediaType){
+
+        System.out.println("Customer we are sending: " + customer.getAccount());
         Response response = baseUrl.path("customers").request().post(Entity.entity(customer, mediaType));
         String output = response.readEntity(String.class);
         System.out.println("This is the result of output: " + output);
+        return output;
+    }
+
+    public Customer getCustomer(String id){
+        return baseUrl.path("customers/" + id).request().get(Customer.class);
     }
 }

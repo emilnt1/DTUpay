@@ -18,17 +18,16 @@ public class UserController {
         return database.addUser(customer);
     }
 
-    public Customer getCustomer() {
-
-        return null;
+    public Customer getCustomer(String id) {
+        return (Customer) database.getUser(id);
     }
 
     public String createMerchant(Merchant merchant){
         return database.addUser(merchant);
     }
 
-    public Merchant getMerchant() {
-        return null;
+    public Merchant getMerchant(String id) {
+        return (Merchant) database.getUser(id);
     }
 
     public User getFMUser(Customer customer) {

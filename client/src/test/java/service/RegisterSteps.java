@@ -10,6 +10,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.acme.Customer;
+import org.acme.Merchant;
 
 import java.math.BigDecimal;
 
@@ -88,9 +90,11 @@ public class RegisterSteps {
 
     @Then("the customer is registered at DTUPay")
     public void theCustomerIsRegisteredAtDTUPay() {
-        customerAPI.createAccount(cuser, cid);
-
-
+        System.out.println(cid);
+        String newid = customerAPI.createAccount(cuser, cid);
+        Customer newCustomer = customerAPI.getCustomer(newid);
+        assertEquals(cuser.getFirstName(), newCustomer.getFirstName());
+        assertEquals(cid, newCustomer.getAccount());
     }
 
     @When("a customer with an invalid bank id is registered")
@@ -110,7 +114,12 @@ public class RegisterSteps {
 
     @Then("the merchant is registered at DTUPay")
     public void theMerchantIsRegisteredAtDTUPay() {
-        merchantAPI.createAccount(muser, mid);
+        System.out.println(mid);
+        String newid = merchantAPI.createAccount(muser, mid);
+        System.out.println("Merchant id from DTU Pay: " + newid);
+        Merchant newMerchant = merchantAPI.getMerchant(newid);
+        assertEquals(muser.getFirstName(), newMerchant.getFirstName());
+        assertEquals(mid, newMerchant.getAccount());
     }
 
     @When("a merchant with an invalid bank id is registered")

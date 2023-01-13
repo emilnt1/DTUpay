@@ -6,8 +6,11 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.acme.Customer;
 import org.acme.Merchant;
+
+import java.util.LinkedList;
 
 public class MerchantAPI {
 
@@ -24,13 +27,25 @@ public class MerchantAPI {
     }
     */
 
-    public void createAccount(User user, String id){
-        Merchant merchant = new Merchant("-1", user.getFirstName(), user.getLastName(), user.getCprNumber(), id);
+    public String createAccount(User user, String accountId){
+        Merchant merchant = new Merchant();
+        merchant.setFirstName(user.getFirstName());
+        merchant.setLastName(user.getLastName());
+        merchant.setAccount(accountId);
+        merchant.setCpr(user.getCprNumber());
+        merchant.setId("-1");
 
-        setMerchant(merchant, MediaType.APPLICATION_JSON);
+        return setMerchant(merchant, MediaType.APPLICATION_JSON);
     }
 
-    private void setMerchant(Merchant merchant, String mediaType){
-        baseUrl.path("merchants").request().post(Entity.entity(merchant, mediaType));
+    private String setMerchant(Merchant merchant, String mediaType){
+        System.out.println("Merchant we are sending: " + merchant.getAccount());
+        Response response = baseUrl.path("merchants").request().post(Entity.entity(merchant, mediaType));
+        String output = response.readEntity(String.class);
+        System.out.println("This is the result of output: " + output);
+        return output;
+    }
+    public Merchant getMerchant(String id){
+        return baseUrl.path("merchants/" + id).request().get(Merchant.class);
     }
 }

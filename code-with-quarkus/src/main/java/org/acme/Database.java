@@ -3,6 +3,7 @@ package org.acme;
 
 import com.sun.mail.iap.ByteArray;
 
+import javax.ws.rs.NotFoundException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,5 +48,15 @@ public class Database {
         byte[] array = new byte[16];
         new Random().nextBytes(array);
         return new String(array, Charset.forName("UTF-8"));
+    }
+
+    public Object getUser(String id) {
+        for (User user: users
+             ) {
+            if (user.id.equals(id)) {
+                    return user;
+            }
+        }
+        throw new NotFoundException("User not found");
     }
 }
