@@ -4,7 +4,6 @@ import dtu.ws.fastmoney.User;
 import org.acme.Customer;
 import org.acme.Database;
 import org.acme.Merchant;
-import org.acme.Payment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
