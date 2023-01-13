@@ -33,6 +33,7 @@ public class CustomerAPI {
     }
 
     private void setCustomer(Customer customer, String mediaType){
+        System.out.println("Customer we are sending: " + customer.getFirstName());
         Response response = baseUrl.path("customers").request().post(Entity.entity(customer, mediaType));
         String output = response.readEntity(String.class);
         System.out.println("This is the result of output: " + output);

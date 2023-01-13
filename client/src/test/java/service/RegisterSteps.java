@@ -35,6 +35,7 @@ public class RegisterSteps {
 
         try{
             cid = bank.createAccountWithBalance(cuser, new BigDecimal(1000));
+            System.out.println(cid);
         } catch(Exception e){
             System.out.println(e.getMessage());
             fail();
@@ -53,6 +54,7 @@ public class RegisterSteps {
 
         try{
             mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));
+            System.out.println(mid);
         } catch(Exception e){
             System.out.println(e.getMessage());
             fail();

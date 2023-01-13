@@ -2,10 +2,9 @@ package Endpoints;
 
 import controller.UserController;
 import jakarta.batch.api.BatchProperty;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import org.acme.Customer;
 import org.acme.Merchant;
 

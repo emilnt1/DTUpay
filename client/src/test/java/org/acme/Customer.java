@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 @XmlRootElement // Needed for XML serialization and deserialization
-@Getter
+@Getter(AccessLevel.PROTECTED)
 @Setter // Automatic getter and setters and equals etc
 @NoArgsConstructor // Needed for JSON deserialization and XML serialization and deserialization
 @AllArgsConstructor
