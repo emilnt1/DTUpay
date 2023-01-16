@@ -1,5 +1,6 @@
 package service;
 
+import com.sun.xml.fastinfoset.util.StringArray;
 import dtu.ws.fastmoney.User;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
@@ -12,6 +13,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.BasicResponseHandler;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class CustomerAPI {
 
@@ -38,6 +40,12 @@ public class CustomerAPI {
         customer.setId("-1");
 
         return setCustomer(customer, MediaType.APPLICATION_JSON);
+    }
+
+    public List<String> getTokens(String id, int amount){
+
+
+        return null;
     }
 
     private String setCustomer(Customer customer, String mediaType){

@@ -5,10 +5,8 @@ import jakarta.batch.api.BatchProperty;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import org.acme.Customer;
-import org.acme.CustomerDTO;
-import org.acme.Merchant;
-import org.acme.MerchantDTO;
+
+import org.acme.*;
 
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.Produces;
@@ -33,6 +31,16 @@ public class MerchantEndpoint {
         Merchant merchant = convertMerchantDTO(merchantDTO);
         return userController.createMerchant(merchant);
     }
+
+    @Path ("/payments")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void makePayment(PaymentDTO paymentDTO){
+
+
+
+    }
+
 
     private Merchant convertMerchantDTO(MerchantDTO merchantDTO){
         Merchant merchant = new Merchant();
@@ -61,6 +69,9 @@ public class MerchantEndpoint {
     public String getService(){
         return "Hello from REST";
     }
+
+
+
 
 
 

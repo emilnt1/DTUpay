@@ -12,8 +12,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.acme.Customer;
 import org.acme.Merchant;
+import org.junit.BeforeClass;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -26,9 +29,10 @@ public class RegisterSteps {
     boolean verified;
     CustomerAPI customerAPI = new CustomerAPI();
     MerchantAPI merchantAPI = new MerchantAPI();
+    List<String> accountsList = new ArrayList<>();
 
 
-    @Before
+  /*  @Before
     public void createCustomerBankAccount(){
         cuser = new User();
         cuser.setCprNumber("1104981234");
@@ -63,8 +67,47 @@ public class RegisterSteps {
         }
     }
 
+
+   */
+
+    @Given("a customer with a registered bank account")
+    public void aCustomerWithARegisteredBankAccount() {
+        cuser = new User();
+        cuser.setCprNumber("1104981234");
+        cuser.setFirstName("Hans Christian");
+        cuser.setLastName("Basse");
+
+        try{
+            cid = bank.createAccountWithBalance(cuser, new BigDecimal(1000));
+            accountsList.add(cid);
+            System.out.println(cid);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            fail();
+        }
+    }
+
+    @And("a merchant with a registered bank account")
+    public void aMerchantWithARegisteredBankAccount() {
+        muser = new User();
+        muser.setCprNumber("2312981234");
+        muser.setFirstName("Emil");
+        muser.setLastName("Bassemand");
+
+        try{
+            mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));
+            accountsList.add(mid);
+            System.out.println(mid);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            fail();
+        }
+    }
+
     @When("I call the bank to get the account")
     public void iGetAValidBankIdAndCheckTheName() {
+
+
         try{
             account = bank.getAccount(cid);
         } catch(Exception e){
@@ -80,7 +123,7 @@ public class RegisterSteps {
         assertEquals(cpr, account.getUser().getCprNumber());
     }
 
-    @Given("a customer with a valid bank id")
+    @When("a customer with a valid bank id wants to register")
     public void aCustomerWithAValidBankId() {
         if(cid == null){
             fail();
@@ -105,7 +148,7 @@ public class RegisterSteps {
     public void theCustomerIsNotRegisteredAtDTUPay() {
     }
 
-    @Given("a merchant with a valid bank id")
+    @When("a merchant with a valid bank id wants to register")
     public void aMerchantWithAValidBankId() {
         if(mid == null) {
             fail();
@@ -131,29 +174,19 @@ public class RegisterSteps {
     }
 
     @After
-    public void afterProcCustomer()
-    {
-        try {
-            bank.retireAccount(cid);
-        } catch (Exception e) {
-
-            System.err.println("Result of after(customer): " + e.getMessage());
-            fail();
-        }
-
-    }
-
-    @After
     public void afterProcMerchant(){
-        try {
-            bank.retireAccount(mid);
-        } catch (Exception e) {
+        for (String id: accountsList
+             ) {
 
-            System.err.println("Result of after(merchant): " + e.getMessage());
-            fail();
+            try {
+                bank.retireAccount(id);
+            } catch (Exception e) {
+
+                System.err.println("Result of after(merchant): " + e.getMessage());
+                fail();
+            }
         }
     }
-
 
 
 }

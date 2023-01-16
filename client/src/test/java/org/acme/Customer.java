@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.*;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 @XmlRootElement // Needed for XML serialization and deserialization
@@ -18,10 +19,15 @@ public class Customer {
     String lastName;
     String cpr;
     String account;
-    Queue<Token> tokens;
+    Queue<String> tokens;
 
 
-    public Token sendToken() throws Exception {
+    public String sendToken() throws Exception {
         return tokens.poll();
+    }
+
+    public void recieveTokens(List<String> tokens){
+        this.tokens.addAll(tokens);
+
     }
 }

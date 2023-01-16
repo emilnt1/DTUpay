@@ -13,7 +13,7 @@ import java.util.Random;
 public class Database {
     HashMap<String, List<Payment>> paymentList;
     List<User> users;
-    List<Token> tokens;
+    HashMap<String, String> tokens;
 
     private static Database databaseInstance = null;
 
@@ -21,7 +21,7 @@ public class Database {
     private Database(){
         paymentList = new HashMap<String, List<Payment>>();
         users = new ArrayList<>();
-        tokens = new ArrayList<>();
+        tokens = new HashMap<String, String>();
     }
 
     public static Database getInstance(){

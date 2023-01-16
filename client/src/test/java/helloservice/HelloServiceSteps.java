@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Before;
 
 /* Hint:
  * The step classes do not do the HTTP requests themselves.
@@ -15,6 +16,12 @@ public class HelloServiceSteps {
 
 	String result;
 	HelloService service = new HelloService();
+
+	@Before
+	public void setup()
+	{
+		System.out.println("Hello service");
+	}
 
 	@When("I call the hello service")
 	public void iCallTheHelloService() {

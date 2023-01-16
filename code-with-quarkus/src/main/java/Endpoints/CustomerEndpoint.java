@@ -45,6 +45,14 @@ public class CustomerEndpoint {
 
     }
 
+    @Path("/tokens/{id}/{amount}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String[] getTokens(@PathParam("id") String id, @PathParam("amount") int amount){
+
+        return null;
+    }
+
+
 
     private Customer convertCustomerDTO(CustomerDTO customerDTO){
         Customer customer = new Customer();
