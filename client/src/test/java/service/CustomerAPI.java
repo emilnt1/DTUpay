@@ -6,14 +6,17 @@ import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.Customer;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.BasicResponseHandler;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class CustomerAPI {
 
@@ -42,10 +45,8 @@ public class CustomerAPI {
         return setCustomer(customer, MediaType.APPLICATION_JSON);
     }
 
-    public List<String> getTokens(String id, int amount){
-
-
-        return null;
+    public Queue<String> getTokens(String id, int amount){
+        return baseUrl.path("customers").path("tokens").path(id).path(Integer.toString(amount)).request().get(new GenericType<Queue<String>>() {});
     }
 
     private String setCustomer(Customer customer, String mediaType){

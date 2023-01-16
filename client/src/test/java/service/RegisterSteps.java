@@ -175,17 +175,17 @@ public class RegisterSteps {
 
     @After
     public void afterProcMerchant(){
-        for (String id: accountsList
-             ) {
-
+        accountsList.forEach((id) -> {
+            System.out.println("Retiriring account: " + id);
             try {
                 bank.retireAccount(id);
+
             } catch (Exception e) {
 
                 System.err.println("Result of after(merchant): " + e.getMessage());
                 fail();
             }
-        }
+        });
     }
 
 

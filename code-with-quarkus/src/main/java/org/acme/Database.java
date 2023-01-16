@@ -59,4 +59,8 @@ public class Database {
         }
         throw new NotFoundException("User not found");
     }
+
+    public void addToken(String token, String cid){
+        tokens.put(token, cid);
+    }
 }
