@@ -15,7 +15,6 @@ public class HelloEndpoint {
     @Produces(MediaType.TEXT_PLAIN)
     public String helloService() {
 
-        LOG.info("din mor er en mand");
         return "Hello from REST";
     }
 }
