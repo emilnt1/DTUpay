@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.acme.Customer;
 import org.acme.Merchant;
+import org.acme.Payment;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,7 +23,8 @@ import static org.junit.Assert.fail;
 
 public class PaymentSteps {
 
-    String mid, cid;
+    String mid, cid, token;
+    int response;
     User cUser, mUser;
     Customer customer;
     Merchant merchant;
@@ -65,18 +67,22 @@ public class PaymentSteps {
 
     @Given("a valid customer and merchant")
     public void aValidCustomerAndMerchant() {
-        cUser.setFirstName("Axel");
-        cUser.setLastName("Dammen");
-        cUser.setCprNumber("1213140595");
-        customer.setFirstName("Axel");
-        customer.setLastName("Dammen");
-        customer.setCpr("1213140595");
-        mUser.setFirstName("Diller");
-        mUser.setLastName("Mand");
-        mUser.setCprNumber("1214150595");
-        merchant.setFirstName("Diller");
-        merchant.setLastName("Mand");
-        merchant.setCpr("1214150595");
+        cUser = new User();
+        cUser.setFirstName("Hansi");
+        cUser.setLastName("Hinter");
+        cUser.setCprNumber("1313141337");
+        customer = new Customer();
+        customer.setFirstName(cUser.getFirstName());
+        customer.setLastName(cUser.getLastName());
+        customer.setCpr(cUser.getCprNumber());
+        mUser = new User();
+        mUser.setFirstName("Kasper");
+        mUser.setLastName("And");
+        mUser.setCprNumber("1414157331");
+        merchant = new Merchant();
+        merchant.setFirstName(mUser.getFirstName());
+        merchant.setLastName(mUser.getLastName());
+        merchant.setCpr(mUser.getCprNumber());
 
 
         try{
@@ -92,17 +98,30 @@ public class PaymentSteps {
 
     }
 
-    @When("a customer wants to make a payment to a merchant")
+    @When("a customer presents a token to a merchant")
     public void aCustomerWantsToMakeAPaymentToAMerchant() {
+        System.out.println("Customer id: " + customer.getId());
+        Queue<String> tokens = customerAPI.getTokens(customer.getId(),5);
+        customer.setTokens(tokens);
+        token = customer.getTokens().poll();
+
+
     }
 
-    @Then("the customer presents a token to the merchant")
-    public void theCustomerPresentsATokenToTheMerchant() {
+    @And("the merchant makes the payment of {int} kr")
+    public void theMerchantMakesThePayment(int amount) {
+        Payment payment = new Payment();
+        payment.setToken(token);
+        payment.setMid(merchant.getId());
+        payment.setAmount(amount);
+        response = merchantAPI.pay(payment);
     }
 
-    @And("the merchant makes the payment")
-    public void theMerchantMakesThePayment() {
+    @Then("the payment is registered with {int}")
+    public void theCustomerReceivesAReceipt(int status) {
+        assertEquals(status, response);
     }
+
     @After
     public void afterProcMerchant(){
         accountsList.forEach((id) -> {
@@ -117,4 +136,6 @@ public class PaymentSteps {
             }
         });
     }
+
+
 }

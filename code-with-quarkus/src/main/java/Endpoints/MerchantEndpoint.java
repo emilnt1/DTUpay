@@ -1,5 +1,6 @@
 package Endpoints;
 
+import controller.PaymentController;
 import controller.UserController;
 import jakarta.batch.api.BatchProperty;
 
@@ -7,6 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import org.acme.*;
+import org.jboss.logging.Logger;
 
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.Produces;
@@ -15,6 +17,10 @@ import javax.ws.rs.core.MediaType;
 @Path("/merchants")
 public class MerchantEndpoint {
     UserController userController = new UserController();
+    PaymentController paymentController = new PaymentController();
+
+    private static final Logger LOG = Logger.getLogger(MerchantEndpoint.class);
+
 
     @GET
     @Path("/{id}")
@@ -32,13 +38,13 @@ public class MerchantEndpoint {
         return userController.createMerchant(merchant);
     }
 
-    @Path ("/payments")
     @POST
+    @Path ("/payments")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void makePayment(PaymentDTO paymentDTO){
-
-
-
+    public String makePayment(PaymentDTO paymentDTO) throws Exception {
+        LOG.info("Received PaymentDTO: " + paymentDTO.getToken() + " " + paymentDTO.getMid());
+        paymentController.makePayment(paymentDTO);
+        return "Payment made";
     }
 
 

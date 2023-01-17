@@ -8,5 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MerchantPayment extends Payment {
+@AllArgsConstructor
+public class Payment {
+    String token;
+    String mid;
+    int amount;
+
 }

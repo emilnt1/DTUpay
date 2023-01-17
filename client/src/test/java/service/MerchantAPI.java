@@ -9,6 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.Customer;
 import org.acme.Merchant;
+import org.acme.Payment;
 
 import java.util.LinkedList;
 
@@ -47,5 +48,10 @@ public class MerchantAPI {
     }
     public Merchant getMerchant(String id){
         return baseUrl.path("merchants/" + id).request().get(Merchant.class);
+    }
+
+    public int pay(Payment payment){
+        Response response = baseUrl.path("merchants").path("payments").request().post(Entity.entity(payment, MediaType.APPLICATION_JSON));
+        return response.getStatus();
     }
 }

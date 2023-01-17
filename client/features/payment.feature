@@ -6,9 +6,9 @@ Feature: payment
 
   Scenario: Customer wants to make a payment to a merchant
     Given a valid customer and merchant
-    When a customer wants to make a payment to a merchant
-    Then the customer presents a token to the merchant
-    And the merchant makes the payment
+    When a customer presents a token to a merchant
+    And the merchant makes the payment of 100 kr
+    Then the payment is registered with 200
 
 
 

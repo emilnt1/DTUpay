@@ -63,4 +63,27 @@ public class Database {
     public void addToken(String token, String cid){
         tokens.put(token, cid);
     }
+
+    public String getCidFromToken(String token){
+        return tokens.get(token);
+    }
+
+    public void addPayment(Payment payment, String id) {
+        if (paymentList.containsKey(id)) {
+            paymentList.get(id).add(payment);
+        } else {
+            List<Payment> payments = new ArrayList<>();
+            payments.add(payment);
+            paymentList.put(id, payments);
+        }
+    }
+    public String getAccountFromId(String id) {
+        for (User user: users
+        ) {
+            if (user.id.equals(id)) {
+                return user.getAccountId();
+            }
+        }
+        throw new NotFoundException("User not found");
+    }
 }
