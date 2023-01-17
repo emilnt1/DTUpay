@@ -1,21 +1,39 @@
 package service;
 
-import dtu.ws.fastmoney.Account;
-import dtu.ws.fastmoney.BankService;
-import dtu.ws.fastmoney.BankServiceService;
-import dtu.ws.fastmoney.User;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ReportSteps {
+    @Given("a valid customer")
+    public void aValidCustomer() {
+    }
 
-    BankService bank;
-    User user;
-    String id;
-    Account account;
+    @When("the customer requests a list of their transactions")
+    public void theCustomerRequestsAListOfTheirTransactions() {
+    }
 
+    @Then("a list of the customers transactions is provided")
+    public void aListOfTheCustomersTransactionsIsProvided() {
+    }
 
+    @Given("a valid merchant")
+    public void aValidMerchant() {
+    }
 
+    @When("a merchant requests a list of their transactions")
+    public void aMerchantRequestsAListOfTheirTransactions() {
+    }
+
+    @Then("a list of a merchants transactions is provided")
+    public void aListOfAMerchantsTransactionsIsProvided() {
+    }
+
+    @When("a manager requests a report of all transactions from DTUPay")
+    public void aManagerRequestsAReportOfAllTransactionsFromDTUPay() {
+    }
+
+    @Then("a list of all transactions is provided")
+    public void aListOfAllTransactionsIsProvided() {
+    }
 }

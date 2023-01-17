@@ -39,7 +39,7 @@ public class PaymentController {
         merchantPayment.setToken(paymentDTO.getToken());
         database.addPayment(customerPayment, cid);
         database.addPayment(merchantPayment, paymentDTO.getMid());
-
+        database.removeToken(paymentDTO.getToken());
     }
 
     public void getReport(String id){}

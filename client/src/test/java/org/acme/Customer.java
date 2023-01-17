@@ -22,7 +22,7 @@ public class Customer {
     Queue<String> tokens;
 
 
-    public String sendToken() throws Exception {
+    public String removeToken(){
         return tokens.poll();
     }
 

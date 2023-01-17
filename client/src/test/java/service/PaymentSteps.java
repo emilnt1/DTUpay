@@ -24,7 +24,7 @@ import static org.junit.Assert.fail;
 public class PaymentSteps {
 
     String mid, cid, token;
-    int response;
+    int response, walletSize;
     User cUser, mUser;
     Customer customer;
     Merchant merchant;
@@ -32,6 +32,7 @@ public class PaymentSteps {
     MerchantAPI merchantAPI = new MerchantAPI();
     CustomerAPI customerAPI = new CustomerAPI();
     BankService bank = new BankServiceService().getBankServicePort();
+
 
 
     @Given("a valid customer registered at dtupay")
@@ -102,8 +103,9 @@ public class PaymentSteps {
     public void aCustomerWantsToMakeAPaymentToAMerchant() {
         System.out.println("Customer id: " + customer.getId());
         Queue<String> tokens = customerAPI.getTokens(customer.getId(),5);
+        walletSize = tokens.size();
         customer.setTokens(tokens);
-        token = customer.getTokens().poll();
+        token = customer.removeToken();
 
 
     }
@@ -115,6 +117,7 @@ public class PaymentSteps {
         payment.setMid(merchant.getId());
         payment.setAmount(new BigDecimal(amount));
         response = merchantAPI.pay(payment);
+
     }
 
     @Then("the payment is registered with {int}")
@@ -126,6 +129,12 @@ public class PaymentSteps {
     public void thePaymentFailsWithErrorCode(int errorCode) {
         assertEquals(errorCode, response);
     }
+
+    @And("the token is removed from the customer")
+    public void theTokenIsRemovedFromTheCustomer() {
+        assertEquals(walletSize-1, customer.getTokens().size());
+    }
+
 
     @After
     public void afterProcMerchant(){
@@ -141,6 +150,7 @@ public class PaymentSteps {
             }
         });
     }
+
 
 
 }

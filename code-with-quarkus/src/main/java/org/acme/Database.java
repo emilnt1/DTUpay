@@ -88,4 +88,8 @@ public class Database {
         }
         return false;
     }
+
+    public void removeToken(String token) {
+        tokens.remove(token);
+    }
 }
