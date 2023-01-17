@@ -1,8 +1,9 @@
 Feature: Report
   Scenario: Customer wants to receive a report of their transactions
-    Given a valid customer
+    Given a valid customer with existing transactions
     When the customer requests a list of their transactions
     Then a list of the customers transactions is provided
+    And the list consists of the correct transactions
 
   Scenario: Merchant wants to receive a report of payments made to them
     Given a valid merchant

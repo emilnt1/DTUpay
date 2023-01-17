@@ -10,13 +10,11 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.Customer;
+import org.acme.UserPayment;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.BasicResponseHandler;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class CustomerAPI {
 
@@ -60,5 +58,10 @@ public class CustomerAPI {
 
     public Customer getCustomer(String id){
         return baseUrl.path("customers/" + id).request().get(Customer.class);
+    }
+
+    public List<UserPayment> getReport(String id){
+        List<UserPayment> userPayments = new ArrayList<>();
+        return userPayments;
     }
 }
