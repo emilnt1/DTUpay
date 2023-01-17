@@ -7,8 +7,12 @@ Feature: payment
   Scenario: Customer wants to make a payment to a merchant
     Given a valid customer and merchant
     When a customer presents a token to a merchant
-    And the merchant makes the payment of 100 kr
+    And the merchant makes the payment of 100.00 kr
     Then the payment is registered with 200
 
-
+  Scenario: Customer wants to make an payment with an invalid amount to a merchant
+    Given a valid customer and merchant
+    When a customer presents a token to a merchant
+    And the merchant makes the payment of -100.00 kr
+    Then the payment fails with error code 400
 

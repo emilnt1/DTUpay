@@ -108,18 +108,23 @@ public class PaymentSteps {
 
     }
 
-    @And("the merchant makes the payment of {int} kr")
-    public void theMerchantMakesThePayment(int amount) {
+    @And("the merchant makes the payment of {float} kr")
+    public void theMerchantMakesThePayment(float amount) {
         Payment payment = new Payment();
         payment.setToken(token);
         payment.setMid(merchant.getId());
-        payment.setAmount(amount);
+        payment.setAmount(new BigDecimal(amount));
         response = merchantAPI.pay(payment);
     }
 
     @Then("the payment is registered with {int}")
     public void theCustomerReceivesAReceipt(int status) {
         assertEquals(status, response);
+    }
+
+    @Then("the payment fails with error code {int}")
+    public void thePaymentFailsWithErrorCode(int errorCode) {
+        assertEquals(errorCode, response);
     }
 
     @After

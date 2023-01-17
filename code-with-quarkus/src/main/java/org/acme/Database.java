@@ -1,14 +1,9 @@
 package org.acme;
 
 
-import com.sun.mail.iap.ByteArray;
-
 import javax.ws.rs.NotFoundException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Database {
     HashMap<String, List<Payment>> paymentList;
@@ -78,12 +73,19 @@ public class Database {
         }
     }
     public String getAccountFromId(String id) {
-        for (User user: users
-        ) {
+        for (User user: users) {
             if (user.id.equals(id)) {
                 return user.getAccountId();
             }
         }
         throw new NotFoundException("User not found");
+    }
+    public boolean checkAccountExist(String id) {
+        for (User user: users) {
+            if (Objects.equals(user.id, id)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

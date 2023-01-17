@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,6 +14,6 @@ import lombok.Setter;
 public class Payment {
     String token;
     String mid;
-    int amount;
+    BigDecimal amount;
 
 }
