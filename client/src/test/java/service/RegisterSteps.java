@@ -39,43 +39,7 @@ public class RegisterSteps {
     List<String> accountsList = new ArrayList<>();
 
 
-  /*  @Before
-    public void createCustomerBankAccount(){
-        cuser = new User();
-        cuser.setCprNumber("1104981234");
-        cuser.setFirstName("Hans Christian");
-        cuser.setLastName("Basse");
 
-        try{
-            cid = bank.createAccountWithBalance(cuser, new BigDecimal(1000));
-            System.out.println(cid);
-        } catch(Exception e){
-            System.out.println(e.getMessage());
-            fail();
-        }
-
-
-
-    }
-
-    @Before
-    public void createMerchantBankAccount(){
-        muser = new User();
-        muser.setCprNumber("2312981234");
-        muser.setFirstName("Emil");
-        muser.setLastName("Bassemand");
-
-        try{
-            mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));
-            System.out.println(mid);
-        } catch(Exception e){
-            System.out.println(e.getMessage());
-            fail();
-        }
-    }
-
-
-   */
 
     @Given("a customer with a registered bank account")
     public void aCustomerWithARegisteredBankAccount() {
