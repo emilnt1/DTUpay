@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh '''
                     set -e
+                    chmod +x -R ${env.WORKSPACE}
                     ./build_and_run.sh
                 '''
             }
