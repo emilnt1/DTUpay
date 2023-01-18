@@ -1,8 +1,8 @@
 version: "3"
 services:
-  simpledtupay:
+  dtupay:
     build: .
-    image: dtupay
+    image: dtupay_backend
     #container_name: dtupaysystem
     ports:
       - "8080:8080"
