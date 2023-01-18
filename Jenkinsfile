@@ -35,13 +35,14 @@ pipeline {
                     pushd code-with-quarkus
                     docker-compose down
                     docker-compose build
+                    popd
                 '''
             }
         }
         stage('Run Docker Compose'){
             steps {
                 sh '''#!/bin/bash
-
+                    pushd code-with-quarkus
                     docker-compose up -d
                     popd
                 '''
