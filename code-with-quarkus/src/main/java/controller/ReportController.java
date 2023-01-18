@@ -16,8 +16,9 @@ public class ReportController {
         List<Customer> customers = database.getCustomers();
         List<Transaction> transactions = new ArrayList<>();
         for (Customer customer : customers) {
+            LOG.info("Customer: " + customer.getId());
             List<Payment> customerPayments = database.getPayments(customer.getId());
-            //LOG.info("Customerpayments: " + customerPayments);
+            LOG.info("Customerpayments: " + customerPayments);
             for (Payment payment: customerPayments) {
                 Transaction transaction = new Transaction();
                 transaction.setCid(customer.getId());

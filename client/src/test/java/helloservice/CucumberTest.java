@@ -14,9 +14,9 @@ For example, the class name CucumberTests (Test with an s) will be ignored by Ma
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin="summary"
-				, glue = {"test.java.helloservice"}
-			   , publish= false
-			   , features = "hellofeature"  // directory of the feature files
+				, glue = {"helloservice"}
+			   	, publish= false
+			   	, features = "hellofeature"  // directory of the feature files
 			   )
 public class CucumberTest {
 }
