@@ -92,4 +92,18 @@ public class Database {
     public void removeToken(String token) {
         tokens.remove(token);
     }
+
+    public List<Payment> getPayments(String id) {
+        return paymentList.get(id);
+    }
+
+    public List<Customer> getCustomers() {
+        List<Customer> customers = new ArrayList<>();
+        for (User user: users) {
+            if (user instanceof Customer) {
+                customers.add((Customer) user);
+            }
+        }
+        return customers;
+    }
 }

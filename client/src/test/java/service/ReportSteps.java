@@ -8,11 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.acme.Customer;
-import org.acme.Merchant;
-import org.acme.Payment;
-import org.acme.UserPayment;
-import org.junit.Assert;
+import org.acme.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,15 +24,20 @@ public class ReportSteps {
     Customer customer;
     Merchant merchant;
     List<String> accountsList = new ArrayList<>();
+
+    List<Transaction> transactions = new ArrayList<>();
     MerchantAPI merchantAPI = new MerchantAPI();
     CustomerAPI customerAPI = new CustomerAPI();
+
+    ReportsAPI reportsAPI = new ReportsAPI();
     BankService bank = new BankServiceService().getBankServicePort();
 
-    List<UserPayment> userPayments;
+    List<CustomerPayment> customerPayments;
+    List<MerchantPayment> merchantPayments;
 
 
 
-    @Given("a valid customer with existing transactions")
+    @Given("a valid customer and a merchant with existing transactions")
     public void aValidCustomerWithExistingTransactions() {
         cUser = new User();
         cUser.setFirstName("Tongo");
@@ -85,38 +86,53 @@ public class ReportSteps {
 
     @When("the customer requests a list of their transactions")
     public void theCustomerRequestsAListOfTheirTransactions() {
-        userPayments = customerAPI.getReport(customer.getId());
+        customerPayments = customerAPI.getReport(customer.getId());
     }
 
     @Then("a list of the customers transactions is provided")
     public void aListOfTheCustomersTransactionsIsProvided() {
-        assertFalse(userPayments.isEmpty());
+        assertFalse(customerPayments.isEmpty());
 
     }
 
-    @And("the list consists of the correct transactions")
+    @And("the list consists of the correct transactions for the customer")
     public void theListConsistsOfTheCorrectTransactions() {
+        assertEquals(1, customerPayments.size());
+        assertEquals(token, customerPayments.get(0).getToken());
+        assertEquals(merchant.getId(), customerPayments.get(0).getMid());
+        assertEquals(new BigDecimal(100), customerPayments.get(0).getAmount());
     }
 
-    @Given("a valid merchant")
-    public void aValidMerchant() {
-    }
 
     @When("a merchant requests a list of their transactions")
     public void aMerchantRequestsAListOfTheirTransactions() {
+        merchantPayments = merchantAPI.getReport(merchant.getId());
     }
 
     @Then("a list of a merchants transactions is provided")
     public void aListOfAMerchantsTransactionsIsProvided() {
+        assertFalse(merchantPayments.isEmpty());
+    }
+
+    @And("the list consists of the correct transactions for the merchant")
+    public void theListConsistsOfTheCorrectTransactionsForTheMerchant() {
+        assertEquals(1, merchantPayments.size());
+        assertEquals(token, merchantPayments.get(0).getToken());
+        assertEquals(new BigDecimal(100), merchantPayments.get(0).getAmount());
     }
 
     @When("a manager requests a report of all transactions from DTUPay")
     public void aManagerRequestsAReportOfAllTransactionsFromDTUPay() {
+        transactions = reportsAPI.getReport();
+
     }
 
     @Then("a list of all transactions is provided")
     public void aListOfAllTransactionsIsProvided() {
+        assertFalse(transactions.isEmpty());
     }
+
+
 
     @After
     public void afterProcMerchant(){
@@ -132,6 +148,7 @@ public class ReportSteps {
             }
         });
     }
+
 
 
 }

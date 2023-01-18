@@ -13,6 +13,7 @@ import org.jboss.logging.Logger;
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/merchants")
 public class MerchantEndpoint {
@@ -45,6 +46,13 @@ public class MerchantEndpoint {
         LOG.info("Received PaymentDTO: " + paymentDTO.getToken() + " " + paymentDTO.getMid());
         paymentController.makePayment(paymentDTO);
         return "Payment made";
+    }
+
+    @GET
+    @Path("payments/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<MerchantPaymentDTO> getPayments(@PathParam("id") String id) {
+        return paymentController.getMerchantReport(id);
     }
 
 

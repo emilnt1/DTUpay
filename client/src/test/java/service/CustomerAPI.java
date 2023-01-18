@@ -1,6 +1,5 @@
 package service;
 
-import com.sun.xml.fastinfoset.util.StringArray;
 import dtu.ws.fastmoney.User;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
@@ -10,9 +9,7 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.Customer;
-import org.acme.UserPayment;
-import org.apache.http.HttpResponse;
-import org.apache.http.impl.client.BasicResponseHandler;
+import org.acme.CustomerPayment;
 
 import java.util.*;
 
@@ -60,8 +57,8 @@ public class CustomerAPI {
         return baseUrl.path("customers/" + id).request().get(Customer.class);
     }
 
-    public List<UserPayment> getReport(String id){
-        List<UserPayment> userPayments = new ArrayList<>();
-        return userPayments;
+    public List<CustomerPayment> getReport(String id){
+
+        return baseUrl.path("customers").path("payments").path(id).request().get(new GenericType<List<CustomerPayment>>() {});
     }
 }

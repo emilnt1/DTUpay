@@ -1,6 +1,7 @@
 package Endpoints;
 
 import controller.BankController;
+import controller.PaymentController;
 import controller.TokenController;
 import controller.UserController;
 
@@ -9,9 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import io.quarkus.logging.Log;
-import org.acme.Customer;
-import org.acme.CustomerDTO;
-import org.acme.TokenDTO;
+import org.acme.*;
 import org.jboss.logging.Logger;
 
 import java.util.List;
@@ -21,6 +20,7 @@ public class CustomerEndpoint {
     UserController userController = new UserController();
     BankController bankController = new BankController();
     TokenController tokenController = new TokenController();
+    PaymentController paymentController = new PaymentController();
     private static final Logger LOG = Logger.getLogger(CustomerEndpoint.class);
 
     @GET
@@ -58,6 +58,14 @@ public class CustomerEndpoint {
         //return tokenDTO;
         return tokenController.generateToken(amount, id);
     }
+
+    @GET
+    @Path("payments/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CustomerPaymentDTO> getCustomerReport(@PathParam("id") String id){
+        return paymentController.getCustomerReport(id);
+    }
+
 
 
 
