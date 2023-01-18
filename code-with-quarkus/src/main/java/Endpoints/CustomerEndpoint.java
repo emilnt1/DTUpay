@@ -1,9 +1,6 @@
 package Endpoints;
 
-import controller.BankController;
-import controller.PaymentController;
-import controller.TokenController;
-import controller.UserController;
+import controller.*;
 
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
@@ -20,7 +17,8 @@ public class CustomerEndpoint {
     UserController userController = new UserController();
     BankController bankController = new BankController();
     TokenController tokenController = new TokenController();
-    PaymentController paymentController = new PaymentController();
+
+    ReportController reportController = new ReportController();
     private static final Logger LOG = Logger.getLogger(CustomerEndpoint.class);
 
     @GET
@@ -63,7 +61,7 @@ public class CustomerEndpoint {
     @Path("payments/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<CustomerPaymentDTO> getCustomerReport(@PathParam("id") String id){
-        return paymentController.getCustomerReport(id);
+        return reportController.getCustomerReport(id);
     }
 
 

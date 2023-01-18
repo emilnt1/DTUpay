@@ -1,6 +1,7 @@
 package Endpoints;
 
 import controller.PaymentController;
+import controller.ReportController;
 import controller.UserController;
 import jakarta.batch.api.BatchProperty;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class MerchantEndpoint {
     UserController userController = new UserController();
     PaymentController paymentController = new PaymentController();
+    ReportController reportController = new ReportController();
 
     private static final Logger LOG = Logger.getLogger(MerchantEndpoint.class);
 
@@ -52,7 +54,7 @@ public class MerchantEndpoint {
     @Path("payments/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<MerchantPaymentDTO> getPayments(@PathParam("id") String id) {
-        return paymentController.getMerchantReport(id);
+        return reportController.getMerchantReport(id);
     }
 
 

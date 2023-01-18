@@ -31,4 +31,44 @@ public class ReportController {
         return transactions;
     }
 
+    public List<CustomerPaymentDTO> getCustomerReport(String id) {
+        List<Payment> payments = database.getPayments(id);
+
+        return convertCustomerPaymentDTO(payments);
+    }
+
+    public List<MerchantPaymentDTO> getMerchantReport(String id) {
+        List<Payment> payments = database.getPayments(id);
+
+        return convertMerchantPaymentDTO(payments);
+    }
+
+    private List<MerchantPaymentDTO> convertMerchantPaymentDTO(List<Payment> payments) {
+        List<MerchantPaymentDTO> merchantPaymentDTOS = new ArrayList<>();
+
+        for (Payment payment : payments) {
+            if (payment instanceof MerchantPayment) {
+                MerchantPaymentDTO merchantPaymentDTO = new MerchantPaymentDTO();
+                merchantPaymentDTO.setToken(payment.getToken());
+                merchantPaymentDTO.setAmount(payment.getAmount());
+                merchantPaymentDTOS.add(merchantPaymentDTO);
+            }
+        }
+        return merchantPaymentDTOS;
+    }
+
+    public List<CustomerPaymentDTO> convertCustomerPaymentDTO(List<Payment> payments) {
+        List<CustomerPaymentDTO> customerPaymentDTOS = new ArrayList<>();
+
+        for (Payment payment : payments) {
+            if (payment instanceof CustomerPayment) {
+                CustomerPaymentDTO customerPaymentDTO = new CustomerPaymentDTO();
+                customerPaymentDTO.setMid(((CustomerPayment) payment).getMid());
+                customerPaymentDTO.setAmount(payment.getAmount());
+                customerPaymentDTO.setToken(payment.getToken());
+                customerPaymentDTOS.add(customerPaymentDTO);
+            }
+        }
+        return customerPaymentDTOS;
+    }
 }
