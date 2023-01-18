@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Test backend') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                     set -e
                     chmod +x build_and_run.sh
 
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Build Docker Compose'){
             steps {
-                sh '''
+                sh '''#!/bin/bash
                     pushd code-with-quarkus
                     docker-compose down
                     docker-compose build
@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Run Docker Compose'){
             steps {
-                sh '''
+                sh '''#!/bin/bash
 
                     docker-compose up -d
                     popd
@@ -49,7 +49,7 @@ pipeline {
         }
         stage('Run end to end test'){
             steps {
-                sh '''
+                sh '''#!/bin/bash
                     pushd client
                     mvn test
                     popd
