@@ -13,8 +13,6 @@ public class BankController {
     BankService bank = new BankServiceService().getBankServicePort();
 
     public boolean verifyAccount(String id) {
-
-
         try{
             LOG.info(bank.getAccount(id).toString());
             bank.getAccount(id);

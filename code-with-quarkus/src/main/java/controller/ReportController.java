@@ -1,13 +1,15 @@
 package controller;
 
+import Endpoints.CustomerEndpoint;
 import org.acme.*;
+import org.jboss.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportController {
 
-
+    private static final Logger LOG = Logger.getLogger(ReportController.class);
     Database database = Database.getInstance();
 
     public List<Transaction> getReport() {
@@ -15,8 +17,7 @@ public class ReportController {
         List<Transaction> transactions = new ArrayList<>();
         for (Customer customer : customers) {
             List<Payment> customerPayments = database.getPayments(customer.getId());
-
-
+            //LOG.info("Customerpayments: " + customerPayments);
             for (Payment payment: customerPayments) {
                 Transaction transaction = new Transaction();
                 transaction.setCid(customer.getId());
@@ -25,7 +26,6 @@ public class ReportController {
                 transaction.setToken(payment.getToken());
                 transactions.add(transaction);
             }
-
         }
 
         return transactions;

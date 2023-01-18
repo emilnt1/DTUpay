@@ -28,6 +28,5 @@ public class Customer {
 
     public void recieveTokens(List<String> tokens){
         this.tokens.addAll(tokens);
-
     }
 }

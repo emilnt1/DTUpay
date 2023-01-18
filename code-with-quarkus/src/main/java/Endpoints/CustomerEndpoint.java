@@ -50,9 +50,6 @@ public class CustomerEndpoint {
     @Path("/tokens/{id}/{amount}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getTokens(@PathParam("id") String id, @PathParam("amount") int amount){
-        //TokenDTO tokenDTO = new TokenDTO();
-        //tokenDTO.setTokens(tokenController.generateToken(amount, id));
-        //return tokenDTO;
         return tokenController.generateToken(amount, id);
     }
 
@@ -94,6 +91,12 @@ public class CustomerEndpoint {
     @Produces(MediaType.TEXT_PLAIN)
     public String getService(){
         return "Hello from REST";
+    }
+
+    @DELETE
+    @Path("{/id}")
+    public void deleteCustomer(@PathParam("id") String id) {
+        userController.deleteUser(id);
     }
 
 

@@ -16,12 +16,12 @@ public class TokenController {
         if (amount < 1 || amount > 5) {
             throw new IllegalArgumentException("Amount must between 1 and 5");
         }
-
         List<String> newList = new ArrayList<>();
         if (database.checkAccountExist(cid)) {
             for (int i = 0; i < amount; i++) {
                 String token = buildString();
                 database.addToken(token, cid);
+                newList.add(token);
             }
         } else {
             throw new IllegalArgumentException("Account does not exist");

@@ -69,17 +69,17 @@ public class PaymentSteps {
     @Given("a valid customer and merchant")
     public void aValidCustomerAndMerchant() {
         cUser = new User();
-        cUser.setFirstName("Hansi");
-        cUser.setLastName("Hinter");
-        cUser.setCprNumber("1313141337");
+        cUser.setFirstName("Per");
+        cUser.setLastName("Frimann");
+        cUser.setCprNumber("3012998765");
         customer = new Customer();
         customer.setFirstName(cUser.getFirstName());
         customer.setLastName(cUser.getLastName());
         customer.setCpr(cUser.getCprNumber());
         mUser = new User();
-        mUser.setFirstName("Kasper");
-        mUser.setLastName("And");
-        mUser.setCprNumber("1414157331");
+        mUser.setFirstName("Michael");
+        mUser.setLastName("Laudrup");
+        mUser.setCprNumber("1414158475");
         merchant = new Merchant();
         merchant.setFirstName(mUser.getFirstName());
         merchant.setLastName(mUser.getLastName());

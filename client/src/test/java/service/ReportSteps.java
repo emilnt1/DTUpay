@@ -40,18 +40,18 @@ public class ReportSteps {
     @Given("a valid customer and a merchant with existing transactions")
     public void aValidCustomerWithExistingTransactions() {
         cUser = new User();
-        cUser.setFirstName("Tongo");
-        cUser.setLastName("Nongo");
-        cUser.setCprNumber("3012997334");
+        cUser.setFirstName("Per");
+        cUser.setLastName("Frimann");
+        cUser.setCprNumber("3012998765");
         customer = new Customer();
         customer.setFirstName(cUser.getFirstName());
         customer.setLastName(cUser.getLastName());
         customer.setCpr(cUser.getCprNumber());
 
         mUser = new User();
-        mUser.setFirstName("Kasper");
-        mUser.setLastName("And");
-        mUser.setCprNumber("1414157331");
+        mUser.setFirstName("Michael");
+        mUser.setLastName("Laudrup");
+        mUser.setCprNumber("1414158475");
         merchant = new Merchant();
         merchant.setFirstName(mUser.getFirstName());
         merchant.setLastName(mUser.getLastName());

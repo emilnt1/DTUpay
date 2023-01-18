@@ -30,6 +30,10 @@ public class UserController {
         return (Merchant) database.getUser(id);
     }
 
+    public void deleteUser(String id) {
+        database.deleteUser(id);
+    }
+
     public User getFMUser(Customer customer) {
         User user = new User();
         user.setFirstName(customer.getFirstName());

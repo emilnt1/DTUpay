@@ -10,13 +10,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import jakarta.ws.rs.NotFoundException;
 import org.acme.Customer;
 import org.acme.Merchant;
+import org.acme.Payment;
 import org.junit.BeforeClass;
+import org.junit.function.ThrowingRunnable;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 import static org.junit.Assert.*;
 
@@ -26,6 +30,9 @@ public class RegisterSteps {
     User cuser, muser;
     String cid,mid;
     Account account;
+    Customer customer;
+    Merchant merchant;
+    String token;
     boolean verified;
     CustomerAPI customerAPI = new CustomerAPI();
     MerchantAPI merchantAPI = new MerchantAPI();
@@ -73,9 +80,9 @@ public class RegisterSteps {
     @Given("a customer with a registered bank account")
     public void aCustomerWithARegisteredBankAccount() {
         cuser = new User();
-        cuser.setCprNumber("1104981234");
-        cuser.setFirstName("Hans Christian");
-        cuser.setLastName("Basse");
+        cuser.setCprNumber("1601641234");
+        cuser.setFirstName("Kurt");
+        cuser.setLastName("Ravn");
 
         try{
             cid = bank.createAccountWithBalance(cuser, new BigDecimal(1000));
@@ -90,9 +97,9 @@ public class RegisterSteps {
     @And("a merchant with a registered bank account")
     public void aMerchantWithARegisteredBankAccount() {
         muser = new User();
-        muser.setCprNumber("2312981234");
-        muser.setFirstName("Emil");
-        muser.setLastName("Bassemand");
+        muser.setCprNumber("0602861234");
+        muser.setFirstName("Lise");
+        muser.setLastName("Dickens");
 
         try{
             mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));
@@ -173,6 +180,77 @@ public class RegisterSteps {
     public void theMerchantIsNotRegisteredAtDTUPay() {
     }
 
+
+    @Given("a customer registered at DTUPay")
+    public void aCustomerRegisteredAtDTUPay() {
+        cuser = new User();
+        cuser.setFirstName("Per");
+        cuser.setLastName("Frimann");
+        cuser.setCprNumber("3012998765");
+        customer = new Customer();
+        customer.setFirstName(cuser.getFirstName());
+        customer.setLastName(cuser.getLastName());
+        customer.setCpr(cuser.getCprNumber());
+
+        muser = new User();
+        muser.setFirstName("Michael");
+        muser.setLastName("Laudrup");
+        muser.setCprNumber("1414158475");
+        merchant = new Merchant();
+        merchant.setFirstName(muser.getFirstName());
+        merchant.setLastName(muser.getLastName());
+        merchant.setCpr(muser.getCprNumber());
+
+
+        try {
+            cid = bank.createAccountWithBalance(cuser, new BigDecimal(1000));
+            accountsList.add(cid);
+            mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));
+            accountsList.add(mid);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        customer.setId(customerAPI.createAccount(cuser, cid));
+        merchant.setId(merchantAPI.createAccount(muser, mid));
+
+        Queue<String> tokens = customerAPI.getTokens(customer.getId(),5);
+        customer.setTokens(tokens);
+        token = customer.removeToken();
+
+        Payment payment = new Payment();
+        payment.setToken(token);
+        payment.setMid(merchant.getId());
+        payment.setAmount(new BigDecimal(100));
+        merchantAPI.pay(payment);
+    }
+
+
+    @When("the customer requests to deregister")
+    public void theCustomerRequestsToDeregister() {
+        customerAPI.deleteCustomer(cid);
+    }
+
+    @Then("the customer is deleted and is no longer in the system")
+    public void theCustomerIsDeletedAndIsNoLongerInTheSystem() {
+        assertThrows(NotFoundException.class, () -> {
+            customerAPI.getCustomer(cid);
+        });
+
+
+    }
+
+    @Given("a merchant registered at DTUPay")
+    public void aMerchantRegisteredAtDTUPay() {
+    }
+
+    @When("the merchant requests to deregister")
+    public void theMerchantRequestsToDeregister() {
+    }
+
+    @Then("the merchant is deleted and is no longer in the system")
+    public void theMerchantIsDeletedAndIsNoLongerInTheSystem() {
+    }
+
     @After
     public void afterProcMerchant(){
         accountsList.forEach((id) -> {
@@ -187,6 +265,5 @@ public class RegisterSteps {
             }
         });
     }
-
 
 }

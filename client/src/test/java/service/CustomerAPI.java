@@ -54,11 +54,14 @@ public class CustomerAPI {
     }
 
     public Customer getCustomer(String id){
-        return baseUrl.path("customers/" + id).request().get(Customer.class);
+        return baseUrl.path("customers").path(id).request().get(Customer.class);
     }
 
     public List<CustomerPayment> getReport(String id){
-
         return baseUrl.path("customers").path("payments").path(id).request().get(new GenericType<List<CustomerPayment>>() {});
+    }
+
+    public void deleteCustomer(String cid) {
+        baseUrl.path("customers").path(cid).request().delete();
     }
 }

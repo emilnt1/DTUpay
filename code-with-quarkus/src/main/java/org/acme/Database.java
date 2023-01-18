@@ -53,6 +53,9 @@ public class Database {
     }
 
     public Object getUser(String id) {
+        if (users.isEmpty()) {
+            throw new NotFoundException("User not found");
+        }
         for (User user: users
              ) {
             if (user.id.equals(id)) {
@@ -112,5 +115,13 @@ public class Database {
             }
         }
         return customers;
+    }
+
+    public void deleteUser(String id) {
+        for (User user: users) {
+            if (user.getId().equals(id)) {
+                users.remove(user);
+            }
+        }
     }
 }

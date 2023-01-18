@@ -3,7 +3,7 @@ Feature: Register
     Given a customer with a registered bank account
     And a merchant with a registered bank account
     When I call the bank to get the account
-    Then I get an account with firstname "Hans Christian", lastname "Basse" and CPR "1104981234"
+    Then I get an account with firstname "Kurt", lastname "Ravn" and CPR "1601641234"
 
   Scenario: Register Customer at DTUPay
     Given a customer with a registered bank account
@@ -24,6 +24,16 @@ Feature: Register
   #Scenario: Register Merchant at DTUPay with invalid bank id
     #When a merchant with an invalid bank id is registered
     #Then the merchant is not registered at DTUPay
+
+  Scenario: Deregister Customer at DTUPay
+    Given a customer registered at DTUPay
+    When the customer requests to deregister
+    Then the customer is deleted and is no longer in the system
+
+  Scenario: Deregister Merchant at DTUPay
+    Given a merchant registered at DTUPay
+    When the merchant requests to deregister
+    Then the merchant is deleted and is no longer in the system
 
 
 
