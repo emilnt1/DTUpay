@@ -17,7 +17,6 @@ public class CustomerEndpoint {
     UserController userController = new UserController();
     BankController bankController = new BankController();
     TokenController tokenController = new TokenController();
-
     ReportController reportController = new ReportController();
     private static final Logger LOG = Logger.getLogger(CustomerEndpoint.class);
 

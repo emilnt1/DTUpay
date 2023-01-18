@@ -20,10 +20,7 @@ public class TokenController {
         List<String> newList = new ArrayList<>();
         if (database.checkAccountExist(cid)) {
             for (int i = 0; i < amount; i++) {
-                byte[] array = new byte[32];
-                new Random().nextBytes(array);
-                String token = new String(array, Charset.forName("UTF-8"));
-                newList.add(token);
+                String token = buildString();
                 database.addToken(token, cid);
             }
         } else {
@@ -32,11 +29,19 @@ public class TokenController {
         return newList;
     }
 
+    private String buildString() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
 
-    public boolean verifyToken() {
-
-        return true;
+        StringBuilder sb = new StringBuilder(32);
+        for (int i = 0; i < 32; i++) {
+            int index = (int) (characters.length()* Math.random());
+            sb.append(characters.charAt(index));
+        }
+        return sb.toString();
     }
+
 
 
 

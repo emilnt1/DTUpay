@@ -40,9 +40,16 @@ public class Database {
     }
 
     private String createId() {
-        byte[] array = new byte[16];
-        new Random().nextBytes(array);
-        return new String(array, Charset.forName("UTF-8"));
+            String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    + "0123456789"
+                    + "abcdefghijklmnopqrstuvxyz";
+
+            StringBuilder sb = new StringBuilder(16);
+            for (int i = 0; i < 16; i++) {
+                int index = (int) (characters.length()* Math.random());
+                sb.append(characters.charAt(index));
+            }
+            return sb.toString();
     }
 
     public Object getUser(String id) {
