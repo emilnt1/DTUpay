@@ -1,0 +1,8 @@
+version: "3"
+services:
+  dtupay:
+    build: .
+    image: dtupay_tokens
+    network_mode: "host"
+    stdin_open: true
+    tty: true

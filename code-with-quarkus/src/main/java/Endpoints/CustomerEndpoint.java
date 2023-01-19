@@ -3,11 +3,9 @@ package Endpoints;
 import Exceptions.IllegalArgumentException;
 import controller.*;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import io.quarkus.logging.Log;
 import org.acme.*;
 import org.jboss.logging.Logger;
 
@@ -17,7 +15,6 @@ import java.util.List;
 public class CustomerEndpoint {
     UserController userController = new UserController();
     BankController bankController = new BankController();
-    TokenController tokenController = new TokenController();
     ReportController reportController = new ReportController();
     private static final Logger LOG = Logger.getLogger(CustomerEndpoint.class);
 
@@ -46,14 +43,6 @@ public class CustomerEndpoint {
         }
 
     }
-
-    @GET
-    @Path("/tokens/{id}/{amount}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getTokens(@PathParam("id") String id, @PathParam("amount") int amount){
-        return tokenController.generateToken(amount, id);
-    }
-
     @GET
     @Path("payments/{id}")
     @Produces(MediaType.APPLICATION_JSON)
