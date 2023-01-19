@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+sudo -type f -exec chmod 755 {} \;
 
 ./build.sh
 
