@@ -45,10 +45,11 @@ public class UserService {
         queue.addHandler("TokensIssued", this::handleTokensIssued);
     }
 
-    public List<String> getTokens(int amount){
+    public List<String> issueTokens(int amount, String cid){
         pendingTokens = new CompletableFuture<>();
         Event event = new Event("TokensRequested", new Object[]{amount});
         queue.publish(event);
+        database.addToken(cid, pendingTokens.join());
         return pendingTokens.join();
     }
 

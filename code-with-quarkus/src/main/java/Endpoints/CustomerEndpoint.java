@@ -50,7 +50,7 @@ public class CustomerEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getTokens(@PathParam("id") String id, @PathParam("amount") int amount){
 
-        return userService.getTokens(amount);
+        return userService.issueTokens(amount, id);
     }
 
     @GET

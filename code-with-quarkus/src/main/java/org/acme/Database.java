@@ -70,6 +70,13 @@ public class Database {
         tokens.put(token, cid);
     }
 
+    public void addToken(String cid, List<String> tokens){
+        for (String token: tokens
+             ) {
+            this.tokens.put(token, cid);
+        }
+    }
+
     public String getCidFromToken(String token){
         return tokens.get(token);
     }
