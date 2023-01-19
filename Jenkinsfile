@@ -5,7 +5,8 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     set -e
-                    sudo find -type f -exec chmod 755 {} \;
+                    #sudo find -type f -exec chmod 755 {} \;
+                    find . -name "*.sh" -exec chmod 755 {} \;
                     ./build_and_run.sh
 
                 '''
