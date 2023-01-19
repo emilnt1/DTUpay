@@ -3,7 +3,6 @@ services:
   rabbitMq:
     image: rabbitmq:3-management
     container_name: rabbitMq_container
-    network_mode: "host"
     ports:
      - "5672:5672"
      - "15672:15672"
