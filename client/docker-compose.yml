@@ -5,31 +5,30 @@ services:
     container_name: rabbitMq_container
     hostname: rabbitMq
     networks:
-      - resolute
+      - network
 
 
   dtupay:
     image: dtupay_backend
     container_name: dtupay_container
     networks:
-      - resolute
+      - network
 
 
   tokenservice:
     image: token-service
     container_name: token_container
     networks:
-      - resolute
+      - network
 
 
   customerservice:
     image: customer
     container_name: customer_container
     networks:
-      - resolute
+      - network
 
 
 networks:
-  resolute:
-    external:
-        name: resolute
+  network:
+    driver: bridge
