@@ -48,9 +48,9 @@ public class CustomerAPI {
 
         System.out.println("Customer we are sending: " + customer.getAccount());
         Response response = baseUrl.path("customers").request().post(Entity.entity(customer, mediaType));
-        Customer output = response.readEntity(Customer.class);
+        String output = response.readEntity(String.class);
         System.out.println("This is the result of output: " + output);
-        return output.getId();
+        return output;
     }
 
     public Customer getCustomer(String id){

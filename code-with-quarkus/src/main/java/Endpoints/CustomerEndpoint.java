@@ -29,8 +29,8 @@ public class CustomerEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Customer createCustomer(CustomerDTO customerDTO)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String createCustomer(CustomerDTO customerDTO)
     {
         Customer customer = this.convertCustomerDTO(customerDTO);
 
@@ -38,7 +38,8 @@ public class CustomerEndpoint {
         LOG.info("Recieved ID: " + customerDTO.getAccount());
 
         if (bankController.verifyAccount(customer.getAccountId())) {
-            return customerService.register(customer);
+            Customer newCustomer = customerService.register(customer);
+            return newCustomer.getId();
         } else
         {
             throw new IllegalArgumentException("Account does not exist");

@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 import messaging.Event;
 import messaging.MessageQueue;
 import org.acme.Customer;
+import org.acme.CustomerDTO;
 import org.acme.Database;
 
 import java.util.concurrent.CompletableFuture;
