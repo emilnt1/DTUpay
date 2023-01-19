@@ -3,11 +3,9 @@ package Endpoints;
 import Exceptions.IllegalArgumentException;
 import controller.*;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import io.quarkus.logging.Log;
 import org.acme.*;
 import org.jboss.logging.Logger;
 
@@ -15,7 +13,7 @@ import java.util.List;
 
 @Path("/customers")
 public class CustomerEndpoint {
-    UserController userController = new UserController();
+    UserService userService = new UserServiceFactory().getService();
     BankController bankController = new BankController();
     TokenController tokenController = new TokenController();
     ReportController reportController = new ReportController();
@@ -25,7 +23,7 @@ public class CustomerEndpoint {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public CustomerDTO getCustomer(@PathParam("id") String id) {
-        return convertCustomerDTO(userController.getCustomer(id));
+        return convertCustomerDTO(userService.getCustomer(id));
     }
 
     @POST
@@ -39,7 +37,7 @@ public class CustomerEndpoint {
         LOG.info("Recieved ID: " + customerDTO.getAccount());
 
         if (bankController.verifyAccount(customer.getAccountId())) {
-            return userController.createCustomer(customer);
+            return userService.createCustomer(customer);
         } else
         {
             throw new IllegalArgumentException("Account does not exist");
@@ -51,7 +49,8 @@ public class CustomerEndpoint {
     @Path("/tokens/{id}/{amount}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getTokens(@PathParam("id") String id, @PathParam("amount") int amount){
-        return tokenController.generateToken(amount, id);
+
+        return userService.getTokens(amount);
     }
 
     @GET
@@ -97,7 +96,7 @@ public class CustomerEndpoint {
     @DELETE
     @Path("{/id}")
     public void deleteCustomer(@PathParam("id") String id) {
-        userController.deleteUser(id);
+        userService.deleteUser(id);
     }
 
 

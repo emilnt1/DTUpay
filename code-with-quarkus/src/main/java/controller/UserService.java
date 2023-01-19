@@ -1,16 +1,22 @@
 package controller;
 
 import dtu.ws.fastmoney.User;
+import lombok.NoArgsConstructor;
+import messaging.Event;
+import messaging.MessageQueue;
 import org.acme.Customer;
 import org.acme.Database;
 import org.acme.Merchant;
-import org.acme.Payment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+@NoArgsConstructor
+public class UserService {
 
-public class UserController {
+
+    private MessageQueue queue;
+
+    private CompletableFuture<List<String>> pendingTokens;
 
     Database database = Database.getInstance();
 
@@ -32,6 +38,24 @@ public class UserController {
 
     public void deleteUser(String id) {
         database.deleteUser(id);
+    }
+
+    public UserService(MessageQueue q){
+        queue = q;
+        queue.addHandler("TokensIssued", this::handleTokensIssued);
+    }
+
+    public List<String> getTokens(int amount){
+        pendingTokens = new CompletableFuture<>();
+        Event event = new Event("TokensRequested", new Object[]{amount});
+        queue.publish(event);
+        return pendingTokens.join();
+    }
+
+    public void handleTokensIssued(Event e){
+        var tokens = e.getArgument(0, List.class);
+        pendingTokens.complete(tokens);
+
     }
 
     public User getFMUser(Customer customer) {

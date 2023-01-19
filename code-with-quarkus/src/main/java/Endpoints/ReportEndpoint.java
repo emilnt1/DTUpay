@@ -2,22 +2,18 @@ package Endpoints;
 
 import controller.PaymentController;
 import controller.ReportController;
-import controller.UserController;
-import org.acme.CustomerPaymentDTO;
-import org.acme.MerchantPaymentDTO;
-import org.acme.PaymentDTO;
+import controller.UserService;
 import org.acme.Transaction;
 import org.jboss.logging.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/reports")
 public class ReportEndpoint {
 
-    UserController userController = new UserController();
+    UserService userService = new UserService();
     PaymentController paymentController = new PaymentController();
 
     ReportController reportController = new ReportController();

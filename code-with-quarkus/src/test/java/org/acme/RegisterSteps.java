@@ -1,24 +1,20 @@
 package org.acme;
 
-import controller.UserController;
+import controller.UserService;
 import dtu.ws.fastmoney.BankService;
-import dtu.ws.fastmoney.BankServiceException;
 import dtu.ws.fastmoney.BankServiceService;
 import dtu.ws.fastmoney.User;
-import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.acme.Customer;
-import org.junit.jupiter.api.Assertions;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RegisterSteps {
-    UserController userController = new UserController();
+    UserService userService = new UserService();
     Customer customer = new Customer();
     Merchant merchant = new Merchant();
     BankService bank = new BankServiceService().getBankServicePort();
@@ -35,7 +31,7 @@ public class RegisterSteps {
 
     @When("the customer wants to link their account with a balance of {int}")
     public void theCustomerWantsToLinkTheirAccountWithABalanceOf(int amount) {
-        User user = userController.getFMUser(customer);
+        User user = userService.getFMUser(customer);
         try {
             customerId = bank.createAccountWithBalance(user, new BigDecimal(amount));
             System.out.println("Customerid: " + customerId);
@@ -61,7 +57,7 @@ public class RegisterSteps {
 
     @When("the merchant want to link their account with a balance of {int}")
     public void theMerchantWantToLinkTheirAccountWithABalanceOf(int amount) {
-        User user = userController.getFMUser(merchant);
+        User user = userService.getFMUser(merchant);
         try {
             merchantId = bank.createAccountWithBalance(user, new BigDecimal(amount));
             System.out.println("merchantid " + merchantId);

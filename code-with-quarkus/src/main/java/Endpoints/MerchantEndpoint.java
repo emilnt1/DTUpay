@@ -2,8 +2,7 @@ package Endpoints;
 
 import controller.PaymentController;
 import controller.ReportController;
-import controller.UserController;
-import jakarta.batch.api.BatchProperty;
+import controller.UserService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,14 +10,12 @@ import javax.ws.rs.core.MediaType;
 import org.acme.*;
 import org.jboss.logging.Logger;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/merchants")
 public class MerchantEndpoint {
-    UserController userController = new UserController();
+    UserService userService = new UserService();
     PaymentController paymentController = new PaymentController();
     ReportController reportController = new ReportController();
 
@@ -29,7 +26,7 @@ public class MerchantEndpoint {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public MerchantDTO getMerchant(@PathParam("id") String id) {
-        return convertMerchantDTO(userController.getMerchant(id));
+        return convertMerchantDTO(userService.getMerchant(id));
     }
 
     @POST
@@ -38,7 +35,7 @@ public class MerchantEndpoint {
     public String createMerchant(MerchantDTO merchantDTO)
     {
         Merchant merchant = convertMerchantDTO(merchantDTO);
-        return userController.createMerchant(merchant);
+        return userService.createMerchant(merchant);
     }
 
     @POST
@@ -89,7 +86,7 @@ public class MerchantEndpoint {
     @DELETE
     @Path("{id}")
     public void deleteMerchant(@PathParam("id") String id) {
-        userController.deleteUser(id);
+        userService.deleteUser(id);
     }
 
 
