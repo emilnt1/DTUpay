@@ -15,7 +15,6 @@ import java.util.List;
 public class CustomerEndpoint {
     UserService userService = new UserServiceFactory().getService();
     BankController bankController = new BankController();
-    TokenController tokenController = new TokenController();
     ReportController reportController = new ReportController();
     private static final Logger LOG = Logger.getLogger(CustomerEndpoint.class);
 
