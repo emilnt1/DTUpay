@@ -1,0 +1,6 @@
+version: '3'
+services:
+  merchantservice:
+    network_mode: "host"
+    image: merchant
+    build: .
