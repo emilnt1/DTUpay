@@ -7,15 +7,15 @@ services:
   dtupay:
     image: dtupay_backend
     container_name: dtupay_container
-    network_mode: "host"
+
 
   tokenservice:
     image: token-service
     container_name: token_container
-    network_mode: "host"
+
 
   customerservice:
     image: customer
     container_name: customer_container
-    network_mode: "host"
+
 
