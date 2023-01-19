@@ -3,7 +3,18 @@ services:
   rabbitMq:
     image: rabbitmq:3-management
     container_name: rabbitMq_container
-    network_mode: "host"
-    #ports:
-     #- "5672:5672"
-     #- "15672:15672"
+    ports:
+     - "5672:5672"
+     - "15672:15672"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1

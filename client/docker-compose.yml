@@ -4,6 +4,7 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitMq_container
 
+
   dtupay:
     image: dtupay_backend
     container_name: dtupay_container
