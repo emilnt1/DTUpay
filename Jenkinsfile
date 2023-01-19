@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build and Test') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                     set -e
                     ./build_and_run.sh
 
