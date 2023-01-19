@@ -14,6 +14,8 @@ import java.util.List;
 @Path("/customers")
 public class CustomerEndpoint {
     UserService userService = new UserServiceFactory().getService();
+
+    CustomerService customerService = new CustomerServiceFactory().getService();
     BankController bankController = new BankController();
     ReportController reportController = new ReportController();
     private static final Logger LOG = Logger.getLogger(CustomerEndpoint.class);
@@ -36,7 +38,8 @@ public class CustomerEndpoint {
         LOG.info("Recieved ID: " + customerDTO.getAccount());
 
         if (bankController.verifyAccount(customer.getAccountId())) {
-            return userService.createCustomer(customer);
+            Customer newCustomer = customerService.register(customer);
+            return newCustomer.getId();
         } else
         {
             throw new IllegalArgumentException("Account does not exist");

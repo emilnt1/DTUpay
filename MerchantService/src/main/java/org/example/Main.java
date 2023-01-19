@@ -13,7 +13,7 @@ public class Main {
     public void startUp() throws Exception{
         System.out.println("startup");
 
-        var mq = new RabbitMqQueue("localhost:5672");
+        var mq = new RabbitMqQueue("localhost");
         new MerchantService(mq);
 
     }

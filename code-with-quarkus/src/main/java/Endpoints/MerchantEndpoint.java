@@ -1,8 +1,7 @@
 package Endpoints;
 
-import controller.PaymentController;
-import controller.ReportController;
-import controller.UserService;
+import Exceptions.IllegalArgumentException;
+import controller.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,8 +14,10 @@ import java.util.List;
 
 @Path("/merchants")
 public class MerchantEndpoint {
-    UserService userService = new UserService();
+    UserService userService = new UserServiceFactory().getService();
+    MerchantService merchantService = new MerchantServiceFactory().getService();
     PaymentController paymentController = new PaymentController();
+    BankController bankController = new BankController();
     ReportController reportController = new ReportController();
 
     private static final Logger LOG = Logger.getLogger(MerchantEndpoint.class);
@@ -35,7 +36,13 @@ public class MerchantEndpoint {
     public String createMerchant(MerchantDTO merchantDTO)
     {
         Merchant merchant = convertMerchantDTO(merchantDTO);
-        return userService.createMerchant(merchant);
+
+        if(bankController.verifyAccount(merchant.getAccountId())){
+            Merchant newMerchant = merchantService.register(merchant);
+            return newMerchant.getId();
+        }else{
+            throw new IllegalArgumentException("Account does not exist");
+        }
     }
 
     @POST
