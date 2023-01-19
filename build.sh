@@ -8,11 +8,20 @@ pushd messaging-utilities-3.3
 ./build.sh
 popd
 
-# Build the services
-pushd code-with-quarkus
+pushd MerchantService
+./build.sh
+popd
+
+pushd CustomerService
 ./build.sh
 popd
 
 pushd TokenService
 ./build.sh
 popd
+
+# Build the services
+pushd code-with-quarkus
+./build.sh
+popd
+
