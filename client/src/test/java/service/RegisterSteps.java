@@ -44,8 +44,8 @@ public class RegisterSteps {
     @Given("a customer with a registered bank account")
     public void aCustomerWithARegisteredBankAccount() {
         cuser = new User();
-        cuser.setCprNumber("1601641234");
-        cuser.setFirstName("Kurt");
+        cuser.setCprNumber("1601641237");
+        cuser.setFirstName("Kurte");
         cuser.setLastName("Ravn");
 
         try{
@@ -61,8 +61,8 @@ public class RegisterSteps {
     @And("a merchant with a registered bank account")
     public void aMerchantWithARegisteredBankAccount() {
         muser = new User();
-        muser.setCprNumber("0602861234");
-        muser.setFirstName("Lise");
+        muser.setCprNumber("1602861234");
+        muser.setFirstName("Lisse");
         muser.setLastName("Dickens");
 
         try{
@@ -148,8 +148,8 @@ public class RegisterSteps {
     @Given("a customer registered at DTUPay")
     public void aCustomerRegisteredAtDTUPay() {
         cuser = new User();
-        cuser.setFirstName("Per");
-        cuser.setLastName("Frimann");
+        cuser.setFirstName("Pers");
+        cuser.setLastName("Frimand");
         cuser.setCprNumber("3012998765");
         customer = new Customer();
         customer.setFirstName(cuser.getFirstName());
@@ -157,9 +157,9 @@ public class RegisterSteps {
         customer.setCpr(cuser.getCprNumber());
 
         muser = new User();
-        muser.setFirstName("Michael");
-        muser.setLastName("Laudrup");
-        muser.setCprNumber("1414158475");
+        muser.setFirstName("Michaello");
+        muser.setLastName("Laundrup");
+        muser.setCprNumber("1514158475");
         merchant = new Merchant();
         merchant.setFirstName(muser.getFirstName());
         merchant.setLastName(muser.getLastName());
