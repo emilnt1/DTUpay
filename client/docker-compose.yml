@@ -3,7 +3,9 @@ services:
   rabbitMq:
     image: rabbitmq:3-management
     container_name: rabbitMq_container
-
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
 
   dtupay:
     image: dtupay_backend
@@ -20,3 +22,10 @@ services:
     container_name: customer_container
 
 
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
