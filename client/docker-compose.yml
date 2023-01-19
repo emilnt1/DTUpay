@@ -3,31 +3,22 @@ services:
   rabbitMq:
     image: rabbitmq:3-management
     container_name: rabbitMq_container
-    networks:
-      - network
 
 
   dtupay:
     image: dtupay_backend
     container_name: dtupay_container
-    networks:
-      - network
+
 
 
   tokenservice:
     image: token-service
     container_name: token_container
-    networks:
-      - network
+
 
 
   customerservice:
     image: customer
     container_name: customer_container
-    networks:
-      - network
 
 
-networks:
-  network:
-    driver: bridge
