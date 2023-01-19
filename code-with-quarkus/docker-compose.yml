@@ -3,6 +3,4 @@ services:
   dtupay:
     build: .
     image: dtupay_backend
-    network_mode: "host"
     stdin_open: true
-    tty: true
