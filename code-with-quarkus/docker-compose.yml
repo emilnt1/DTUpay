@@ -3,6 +3,7 @@ services:
   dtupay:
     build: .
     image: dtupay_backend
-    #container_name: dtupaysystem
+    stdin_open: true
+    tty: true
     ports:
       - "8080:8080"
