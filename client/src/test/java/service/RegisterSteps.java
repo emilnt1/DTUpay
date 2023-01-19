@@ -44,8 +44,8 @@ public class RegisterSteps {
     @Given("a customer with a registered bank account")
     public void aCustomerWithARegisteredBankAccount() {
         cuser = new User();
-        cuser.setCprNumber("1601641237");
-        cuser.setFirstName("Kurte");
+        cuser.setCprNumber("1701641237");
+        cuser.setFirstName("Kurtis");
         cuser.setLastName("Ravn");
 
         try{
