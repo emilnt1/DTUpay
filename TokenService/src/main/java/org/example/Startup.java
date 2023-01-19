@@ -18,7 +18,7 @@ public class Startup {
         System.out.println("startup");
 
         var mq = new RabbitMqQueue("localhost");
-        new TokenService(mq);
+        new org.example.TokenService(mq);
 
     }
 }

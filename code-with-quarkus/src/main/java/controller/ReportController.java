@@ -17,7 +17,8 @@ public class ReportController {
         List<Transaction> transactions = new ArrayList<>();
         for (Customer customer : customers) {
             LOG.info("Customer: " + customer.getId());
-            List<Payment> customerPayments = database.getPayments(customer.getId());
+            List<Payment> customerPayments;
+            customerPayments = database.getPayments(customer.getId());
             if (customerPayments.equals(null)) {
                 break;
             }

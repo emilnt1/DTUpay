@@ -9,7 +9,7 @@ public class UserServiceFactory {
         if(userService != null){
             return userService;
         }
-        var mq = new RabbitMqQueue("rabbitMq");
+        var mq = new RabbitMqQueue("localhost");
         userService = new UserService(mq);
         return userService;
     }
