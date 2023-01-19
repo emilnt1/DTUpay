@@ -4,3 +4,4 @@ services:
     build: .
     image: dtupay_backend
     stdin_open: true
+    tty: true

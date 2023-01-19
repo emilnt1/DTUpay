@@ -3,7 +3,7 @@ Feature: Register
     Given a customer with a registered bank account
     And a merchant with a registered bank account
     When I call the bank to get the account
-    Then I get an account with firstname "Kurtis", lastname "Ravn" and CPR "1701641237"
+    Then I get an account with firstname "Kutis", lastname "Ran" and CPR "1701901237"
 
   Scenario: Register Customer at DTUPay
     Given a customer with a registered bank account
