@@ -17,7 +17,7 @@ public class init {
     public void startUp() throws Exception{
         System.out.println("startup");
 
-        var mq = new RabbitMqQueue("rabbitMq");
+        var mq = new RabbitMqQueue("localhost");
         new CustomerService(mq);
 
     }
