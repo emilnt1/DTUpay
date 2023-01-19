@@ -1,5 +1,6 @@
 package Endpoints;
 
+import Exceptions.IllegalArgumentException;
 import controller.*;
 
 import javax.print.attribute.standard.Media;

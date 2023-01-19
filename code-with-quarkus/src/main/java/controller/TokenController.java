@@ -1,5 +1,6 @@
 package controller;
 
+import Exceptions.IllegalArgumentException;
 import org.acme.Database;
 
 import java.nio.charset.Charset;

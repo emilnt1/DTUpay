@@ -61,4 +61,8 @@ public class MerchantAPI {
     public List<MerchantPayment> getReport(String id) {
         return baseUrl.path("merchants").path("payments").path(id).request().get(new GenericType<List<MerchantPayment>>() {});
     }
+
+    public void deleteMerchant(String mid) {
+        baseUrl.path("merchants").path(mid).request().delete();
+    }
 }

@@ -86,6 +86,12 @@ public class MerchantEndpoint {
         return "Hello from REST";
     }
 
+    @DELETE
+    @Path("{id}")
+    public void deleteMerchant(@PathParam("id") String id) {
+        userController.deleteUser(id);
+    }
+
 
 
 

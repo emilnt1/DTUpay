@@ -30,6 +30,7 @@ public class Database {
     public String addUser(Customer customer) {
         customer.setId(createId());
         users.add(customer);
+        paymentList.put(customer.getId(), new ArrayList<>());
         return customer.id;
     }
 
@@ -120,6 +121,9 @@ public class Database {
     public void deleteUser(String id) {
         for (User user: users) {
             if (user.getId().equals(id)) {
+                if (user instanceof Customer) {
+                    tokens.remove(user.id);
+                }
                 users.remove(user);
             }
         }

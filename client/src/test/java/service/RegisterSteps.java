@@ -148,18 +148,18 @@ public class RegisterSteps {
     @Given("a customer registered at DTUPay")
     public void aCustomerRegisteredAtDTUPay() {
         cuser = new User();
-        cuser.setFirstName("Persu");
-        cuser.setLastName("Frimandos");
-        cuser.setCprNumber("1212999765");
+        cuser.setFirstName("Kurt");
+        cuser.setLastName("Maj");
+        cuser.setCprNumber("3012997568");
         customer = new Customer();
         customer.setFirstName(cuser.getFirstName());
         customer.setLastName(cuser.getLastName());
         customer.setCpr(cuser.getCprNumber());
 
         muser = new User();
-        muser.setFirstName("Michaelo");
-        muser.setLastName("Laundrupes");
-        muser.setCprNumber("1713158480");
+        muser.setFirstName("Arne");
+        muser.setLastName("Skrødsbøl");
+        muser.setCprNumber("1414154432");
         merchant = new Merchant();
         merchant.setFirstName(muser.getFirstName());
         merchant.setLastName(muser.getLastName());
@@ -205,14 +205,34 @@ public class RegisterSteps {
 
     @Given("a merchant registered at DTUPay")
     public void aMerchantRegisteredAtDTUPay() {
+        muser = new User();
+        muser.setFirstName("Michael");
+        muser.setLastName("Brian");
+        muser.setCprNumber("1414151818");
+        merchant = new Merchant();
+        merchant.setFirstName(muser.getFirstName());
+        merchant.setLastName(muser.getLastName());
+        merchant.setCpr(muser.getCprNumber());
+
+        try {
+            mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));
+            accountsList.add(mid);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @When("the merchant requests to deregister")
     public void theMerchantRequestsToDeregister() {
+        merchantAPI.deleteMerchant(mid);
     }
 
     @Then("the merchant is deleted and is no longer in the system")
     public void theMerchantIsDeletedAndIsNoLongerInTheSystem() {
+        assertThrows(NotFoundException.class, () -> {
+            merchantAPI.getMerchant(mid);
+        });
     }
 
     @After

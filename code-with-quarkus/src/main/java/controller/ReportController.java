@@ -18,6 +18,9 @@ public class ReportController {
         for (Customer customer : customers) {
             LOG.info("Customer: " + customer.getId());
             List<Payment> customerPayments = database.getPayments(customer.getId());
+            if (customerPayments.equals(null)) {
+                break;
+            }
             LOG.info("Customerpayments: " + customerPayments);
             for (Payment payment: customerPayments) {
                 Transaction transaction = new Transaction();
