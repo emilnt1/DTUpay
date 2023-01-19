@@ -17,7 +17,7 @@ public class Startup {
     public void startUp() throws Exception{
         System.out.println("startup");
 
-        var mq = new RabbitMqQueue("http://localhost:5672");
+        var mq = new RabbitMqQueue("localhost");
         new org.example.TokenService(mq);
 
     }
