@@ -2,10 +2,10 @@ package org.example;
 
 import messaging.implementations.RabbitMqQueue;
 
-public class Startup {
+public class init {
     public static void main(String[] args) throws Exception {
 
-        new Startup().startUp();
+        new init().startUp();
 
 
 

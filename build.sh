@@ -16,3 +16,7 @@ popd
 pushd TokenService
 ./build.sh
 popd
+
+pushd CustomerService
+./build.sh
+popd
