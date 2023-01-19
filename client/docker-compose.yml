@@ -3,29 +3,33 @@ services:
   rabbitMq:
     image: rabbitmq:3-management
     container_name: rabbitMq_container
+    hostname: rabbitMq
     networks:
-      vpcbr:
-        ipv4_address: 10.5.0.5
+      - resolute
+
 
   dtupay:
     image: dtupay_backend
     container_name: dtupay_container
+    networks:
+      - resolute
 
 
   tokenservice:
     image: token-service
     container_name: token_container
+    networks:
+      - resolute
 
 
   customerservice:
     image: customer
     container_name: customer_container
+    networks:
+      - resolute
 
 
 networks:
-  vpcbr:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
-          gateway: 10.5.0.1
+  resolute:
+    external:
+        name: resolute
