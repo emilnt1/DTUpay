@@ -94,12 +94,7 @@
             <artifactId>messaging-utilities</artifactId>
             <version>3.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>TokenService</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
