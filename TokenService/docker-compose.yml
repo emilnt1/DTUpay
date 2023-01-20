@@ -3,3 +3,4 @@ services:
   tokenservice:
     image: token-service
     build: .
+
