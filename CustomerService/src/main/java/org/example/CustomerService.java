@@ -10,8 +10,6 @@ public class CustomerService {
     public CustomerService(MessageQueue q) {
         this.queue = q;
         this.queue.addHandler("CreateCustomer", this::CreateCustomer);
-        this.queue.addHandler("GetCustomer", this::GetCustomer);
-        this.queue.addHandler("DeleteCustomer", this::DeleteCustomer);
     }
 
     public void CreateCustomer(Event e) {

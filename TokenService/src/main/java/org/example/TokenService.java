@@ -13,8 +13,6 @@ public class TokenService {
     public TokenService(MessageQueue mq){
         this.queue = mq;
         this.queue.addHandler("TokensRequested", this::handleTokensRequested);
-
-
     }
 
 
@@ -24,7 +22,6 @@ public class TokenService {
 
         Event event = new Event("TokensIssued", new Object[] {tokens});
         queue.publish(event);
-
     }
 
 
