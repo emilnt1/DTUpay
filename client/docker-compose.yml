@@ -13,9 +13,13 @@ services:
     container_name: token_container
 
 
-
   customerservice:
     image: customer
     container_name: customer_container
+
+
+  merchantservice:
+    image: merchant
+    container_name: merchant_container
 
 
