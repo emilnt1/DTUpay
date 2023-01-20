@@ -38,9 +38,9 @@ public class PaymentSteps {
     @Given("a valid customer registered at dtupay")
     public void aValidCustomer() {
         cUser = new User();
-        cUser.setFirstName("Tongono");
-        cUser.setLastName("Nongono");
-        cUser.setCprNumber("2812997334");
+        cUser.setFirstName("Kon");
+        cUser.setLastName("Tiki");
+        cUser.setCprNumber("2812896644");
         customer = new Customer();
         customer.setFirstName(cUser.getFirstName());
         customer.setLastName(cUser.getLastName());
@@ -69,17 +69,17 @@ public class PaymentSteps {
     @Given("a valid customer and merchant")
     public void aValidCustomerAndMerchant() {
         cUser = new User();
-        cUser.setFirstName("Perle");
-        cUser.setLastName("Frismann");
-        cUser.setCprNumber("2412998765");
+        cUser.setFirstName("Pom");
+        cUser.setLastName("Pogo");
+        cUser.setCprNumber("0808965467");
         customer = new Customer();
         customer.setFirstName(cUser.getFirstName());
         customer.setLastName(cUser.getLastName());
         customer.setCpr(cUser.getCprNumber());
         mUser = new User();
-        mUser.setFirstName("Mochael");
-        mUser.setLastName("Landdrup");
-        mUser.setCprNumber("1414168475");
+        mUser.setFirstName("Porko");
+        mUser.setLastName("Rosso");
+        mUser.setCprNumber("1414164325");
         merchant = new Merchant();
         merchant.setFirstName(mUser.getFirstName());
         merchant.setLastName(mUser.getLastName());

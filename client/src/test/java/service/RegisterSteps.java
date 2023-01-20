@@ -44,9 +44,9 @@ public class RegisterSteps {
     @Given("a customer with a registered bank account")
     public void aCustomerWithARegisteredBankAccount() {
         cuser = new User();
-        cuser.setCprNumber("1701641237");
-        cuser.setFirstName("Kurtis");
-        cuser.setLastName("Ravn");
+        cuser.setCprNumber("1701646666");
+        cuser.setFirstName("Kurtman");
+        cuser.setLastName("Raven");
 
         try{
             cid = bank.createAccountWithBalance(cuser, new BigDecimal(1000));
@@ -61,9 +61,9 @@ public class RegisterSteps {
     @And("a merchant with a registered bank account")
     public void aMerchantWithARegisteredBankAccount() {
         muser = new User();
-        muser.setCprNumber("1602861234");
-        muser.setFirstName("Lisse");
-        muser.setLastName("Dickens");
+        muser.setCprNumber("1602869999");
+        muser.setFirstName("Lise");
+        muser.setLastName("hansen");
 
         try{
             mid = bank.createAccountWithBalance(muser, new BigDecimal(1000));
