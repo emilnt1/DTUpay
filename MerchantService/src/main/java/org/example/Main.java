@@ -19,6 +19,7 @@ public class Main {
                 System.out.println("startup");
 
                 var mq = new RabbitMqQueue("rabbitMq");
+
                 new MerchantService(mq);
                 break;
             } catch (Exception e) {

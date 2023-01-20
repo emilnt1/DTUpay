@@ -7,6 +7,11 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  dtupay:
+    image: dtupay_backend
+    container_name: dtupay_container
+    ports:
+      - "8080:8080"
 
   tokenservice:
     image: token-service

@@ -16,3 +16,11 @@ popd
 pushd TokenService
 mvn clean
 popd
+
+pushd CustomerService
+mvn clean
+popd
+
+pushd MerchantService
+mvn clean
+popd

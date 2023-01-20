@@ -44,6 +44,7 @@ public class RabbitMqQueue implements MessageQueue {
 	}
 
 	private Channel setUpChannel() {
+		System.out.println(hostname);
 		Channel chan;
 		try {
 			ConnectionFactory factory = new ConnectionFactory();
