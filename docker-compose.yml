@@ -1,0 +1,54 @@
+version: "3"
+services:
+
+
+  code-with-quarkus:
+    build:
+      context: ./code-with-quarkus
+      dockerfile: Dockerfile
+    container_name: code-with-quarkus
+    ports:
+      - "8080:8080"
+
+  tokenservice:
+    build:
+      context: ./TokenService
+      dockerfile: Dockerfile
+    container_name: token_container
+    depends_on:
+      - rabbitMq
+    restart: on-failure
+
+
+  customerservice:
+    build:
+      context: ./CustomerService
+      dockerfile: Dockerfile
+    container_name: customer_container
+    depends_on:
+      - rabbitMq
+    restart: on-failure
+
+  merchantservice:
+    build:
+      context: ./MerchantService
+      dockerfile: Dockerfile
+    container_name: merchant_container
+    depends_on:
+      - rabbitMq
+    restart: on-failure
+
+
+  rabbitMq:
+    image: rabbitmq:3-management
+    container_name: rabbitMq_container
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+
+
+networks:
+  default: # this network (app2)
+    driver: bridge
+
